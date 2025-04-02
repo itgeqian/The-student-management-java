@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.student.mapper.HomeworkMapper">
+    <select id="selectTeacherGrades" resultType="com.student.entity.Homework">
+        SELECT DISTINCT
+            h.*,
+            cc.name as course_class_name,
+            c.name as course_name,
+            c.code as course_code
+        FROM homework h
+        INNER JOIN course_class cc ON h.course_class_id = cc.id
+        INNER JOIN course c ON cc.course_id = c.id
+        LEFT JOIN homework_submission hs ON h.id = hs.homework_id
+        LEFT JOIN student s ON hs.student_id = s.id
+        WHERE h.teacher_id = #{teacherId}
+        <if test="studentName != null and studentName != ''">
+            AND s.name LIKE CONCAT('%', #{studentName}, '%')
+        </if>
+        <if test="studentNo != null and studentNo != ''">
+            AND s.student_no LIKE CONCAT('%', #{studentNo}, '%')
+        </if>
+        <if test="courseName != null and courseName != ''">
+            AND c.name LIKE CONCAT('%', #{courseName}, '%')
+        </if>
+        <if test="courseCode != null and courseCode != ''">
+            AND c.code LIKE CONCAT('%', #{courseCode}, '%')
+        </if>
+        ORDER BY h.create_time DESC
+    </select>
+</mapper>

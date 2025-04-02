@@ -1,0 +1,86 @@
+<template>
+  <div v-if="!item.hidden">
+    <!-- 一级菜单（有子菜单） -->
+    <template v-if="item.children && item.children.length > 0">
+      <el-sub-menu :index="resolvePath(item.path)">
+        <template #title>
+          <el-icon v-if="item.meta?.icon">
+            <component :is="item.meta.icon" />
+          </el-icon>
+          <span>{{ item.meta?.title }}</span>
+        </template>
+        <sidebar-item
+          v-for="child in item.children"
+          :key="child.path"
+          :item="child"
+          :base-path="resolvePath(item.path)"
+        />
+      </el-sub-menu>
+    </template>
+
+    <!-- 二级菜单项 -->
+    <template v-else>
+      <el-menu-item :index="resolvePath(item.path)">
+        <el-icon v-if="item.meta?.icon">
+          <component :is="item.meta.icon" />
+        </el-icon>
+        <template #title>{{ item.meta?.title }}</template>
+      </el-menu-item>
+    </template>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true
+  },
+  basePath: {
+    type: String,
+    default: ''
+  }
+})
+
+const resolvePath = (routePath) => {
+  // 如果没有路径，返回基础路径
+  if (!routePath) {
+    return props.basePath
+  }
+
+  // 如果是完整路径，直接返回
+  if (routePath.startsWith('/')) {
+    return routePath
+  }
+
+  // 如果是父级菜单（有子菜单的情况）
+  if (props.item.children) {
+    return `/${routePath}`
+  }
+
+  // 获取父级路径
+  const parentPath = props.basePath || 'system'
+  return `/${parentPath}/${routePath}`.replace(/\/+/g, '/')
+}
+</script>
+
+<style lang="scss" scoped>
+.svg-icon {
+  margin-right: 16px;
+}
+
+.el-menu {
+  border: none;
+  height: 100%;
+  width: 100% !important;
+}
+
+.submenu-title-noDropdown,
+.el-submenu__title {
+  &:hover {
+    background-color: var(--el-menu-hover-bg-color) !important;
+  }
+}
+</style>
