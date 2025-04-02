@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.2" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.1" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Login-Decoration" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Books Stack -->
+        <g id="Books" transform="translate(100, 150)">
+            <rect id="Book1" fill="url(#linearGradient-1)" x="0" y="0" width="200" height="30" rx="4"></rect>
+            <rect id="Book2" fill="url(#linearGradient-1)" x="20" y="40" width="180" height="30" rx="4"></rect>
+            <rect id="Book3" fill="url(#linearGradient-1)" x="40" y="80" width="160" height="30" rx="4"></rect>
+        </g>
+        
+        <!-- Floating Elements -->
+        <g id="FloatingElements" fill="url(#linearGradient-1)">
+            <circle cx="400" cy="100" r="20"></circle>
+            <circle cx="500" cy="200" r="15"></circle>
+            <circle cx="300" cy="300" r="25"></circle>
+            <rect x="450" y="350" width="40" height="40" rx="8"></rect>
+            <rect x="250" y="250" width="30" height="30" rx="6"></rect>
+        </g>
+        
+        <!-- Abstract Lines -->
+        <g id="Lines" stroke="url(#linearGradient-1)" stroke-width="2">
+            <path d="M600,100 C650,150 700,100 750,150"></path>
+            <path d="M550,200 C600,250 650,200 700,250"></path>
+            <path d="M500,300 C550,350 600,300 650,350"></path>
+        </g>
+        
+        <!-- Education Icons -->
+        <g id="Icons" fill="url(#linearGradient-1)">
+            <!-- Graduation Cap -->
+            <path d="M350,450 L400,420 L450,450 L400,480 Z"></path>
+            <!-- Pencil -->
+            <path d="M500,420 L520,420 L520,480 L500,480 Z"></path>
+            <!-- Notebook -->
+            <rect x="550" y="420" width="40" height="60" rx="4"></rect>
+        </g>
+    </g>
+</svg>
